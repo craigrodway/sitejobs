@@ -1,0 +1,60 @@
+<p>&nbsp;</p>
+
+<table class="form">
+	
+	<tr>
+		<td class="label">Type</td>
+		<td class="input"><span><%= job.type %></span></td>
+	</tr>
+	
+	<tr>
+		<td class="label">Room</td>
+		<td class="input"><span><%= job.room %></span></td>
+	</tr>
+	
+	<tr>
+		<td class="label">Submitted by</td>
+		<td class="input"><span><%= job.creator %></span></td>
+	</tr>
+	
+	<tr>
+		<td class="label">Date submitted</td>
+		<td class="input"><span><%= job.created_ %></span></td>
+	</tr>
+	
+	<tr>
+		<td class="label">Date updated</td>
+		<td class="input"><span><%= job.updated %></span></td>
+	</tr>
+	
+	<tr>
+		<td class="label">First report</td>
+		<td class="input"><span class="<%= (job.first == 1) ? 'green_fg' : 'red_fg' %>"> <%= (job.first == 1) ? 'Yes' : 'No' %> </span></td>
+	</tr>
+	
+	<tr>
+		<td class="label">Assigned to</td>
+		<td class="input"><%= 
+			(job.owner === null) ? 'Nobody' 
+			: (job.owner === user.username) ? 'You!' 
+			: job.owner
+		%></td>
+	</tr>
+	
+	<tr>
+		<td class="label">Description</td>
+		<td class="input"><%= job.description %></td>
+	</tr>
+	
+</table>
+
+<table class="form noborder">
+	<tr>
+		<td style="width: 180px;">&nbsp;</td>
+		<td>
+			<a class="btn positive" name="addcomment" href="#/addcomment/<%= job.id %>" data-method="post"> 
+				<img src="web/img/comment_add.png" alt=""/> Add Comment
+			</button>
+		</td>
+	</tr>
+</table>

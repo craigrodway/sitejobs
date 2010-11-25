@@ -1,0 +1,434 @@
+body { }
+
+a{
+	color: #5C73B8;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+
+div#fullwidth{
+	background: #4c228c;
+	color: #fff;
+	padding: 0.6em 0;
+	margin: 0 0 2em 0;
+}
+
+div#fullwidth h1{
+	margin: 0;
+	font-size: 125%;
+}
+
+div#fullwidth a{
+	color: #fff;
+}
+
+div#head-right{
+	text-align: right;
+	color: #fff;
+	font-size: 105%;
+}
+
+div#head-right span{
+	font-weight: bold;
+	font-size: 110%;
+}
+
+
+h1, h2, h3, h4, h5, h6{ letter-spacing: -1px; }
+
+
+h2{
+	font-size: 150%;
+	font-weight: normal;
+}
+
+h3{
+	font-size: 130%;
+	font-weight: normal;
+}
+
+.noborder{ border: 0 !important; }
+.hidden{ display: none; }
+
+
+
+a.button{
+	display: inline-block;
+	background: #4c228c;
+	color: #fff;
+	padding: 5px 10px;
+	text-decoration: none;
+	font-weight: bold;
+	margin: 0 0.7em 0.7em 0;
+	letter-spacing: -1px;
+}
+
+a.button:hover{
+	background: #795AA9;
+}
+
+.new_bg{ background: #f57900 !important; color: #fff !important; }
+.new_bg:hover{ background: #ce5c00 !important; color: #fff !important; }
+.open_bg{ background: #73d216 !important; color: #fff; }
+.open_bg:hover{ background: #4e9a06 !important; color: #fff; }
+.mine_bg{ background: #3465a4 !important; color: #fff; }
+.mine_bg:hover{ background: #204a87 !important; color: #fff; }
+.closed_bg{ background: #888a85 !important; color: #fff; }
+.closed_bg:hover{ background: #555753 !important; color: #fff; }
+
+.new_fg{ color: #ce5c00; }
+.open_fg{ color: #4e9a06; }
+.mine_fg{ color: #204a87; }
+.closed_fg{ color: #555753; }
+
+
+.green_fg{ color: darkgreen !important; }
+.red_fg{ color: darkred !important; }
+
+
+div.box{
+	border: 1px solid #ccc;
+}
+div.box>div{
+	margin: 0.7em;
+}
+
+
+div#main-list{
+	border-top: 1px solid #ccc;
+}
+div.job{
+	border-bottom: 1px solid #ccc;
+	padding: 10px 0;
+}
+
+div.job p{
+	margin: 0;
+}
+
+
+div.job-age{
+	background: #FADB92;
+}
+div.job-age span.number{
+	font-size: 230%;
+	display: block;
+	text-align: center;
+}
+div.job-age span.measure{
+	text-align: center;
+	display: block;
+}
+
+
+div.job-info p.top-line{
+	font-size: 180%;
+	color: #000;
+}
+div.job-info span.type{
+	color: #6BB300;
+}
+div.job-info span.room{
+	color: #BF8630;
+}
+
+div.info p.bottom-line{
+	font-weight: bold;
+}
+
+
+
+
+/* Form table */
+table.form{
+	width: 100%;
+	border-top: 1px solid #D7D7D7;
+}
+
+table.form tr td{
+	padding: 0.7em;
+	border-bottom: 1px solid #D7D7D7;
+	text-align: top;
+}
+
+table.form tbody tr td.label{
+	background: #E6E6E6;
+	width: 180px;
+	color: #4F545A;
+	text-align: right;
+	font-size: 110%;
+	vertical-align: top;
+}
+
+table.form tbody tr td.input input,
+table.form tbody tr td.input select,
+table.form tbody tr td.input textarea,
+table.form tbody tr td.input span{
+	padding: 4px;
+	font-size: 105%;
+	border: 1px solid #BBB;
+	color: #333;
+}
+table.form tbody tr td.input span{
+	border: 0 !important;
+}
+
+table.form tr td.input p.hint{
+	font-size: 90%;
+	color: #666;
+	margin: 2px 0 0 0;
+}
+
+
+
+
+table.form-radio{
+	width: auto;
+	margin: 0;
+}
+table.form-radio tr td{
+	padding: 4px;
+	border: 0;
+	vertical-align: middle !important;
+	background: transparent !important;
+	text-align: left !important;
+}
+table.form-radio tr td.input{
+	width: 20px;
+}
+table.form-radio tr td.label{
+	width: auto !important;
+	padding-right: 2em;
+}
+
+
+label.check {
+	display: block;
+	padding-left: 20px;
+	text-indent: -20px;
+}
+
+label.check input {
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	margin: 0 4px 0 0 ;
+	vertical-align: bottom;
+	position: relative;
+	top: -3px;
+	*overflow: hidden;
+}
+
+
+
+div.comment{
+	background: #FEF5A8;
+}
+
+
+
+/* Form buttons */
+input.btn, a.btn, button.btn{
+	padding: 4px 6px;
+	border: none;
+	text-overflow: ellipsis;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	text-transform: uppercase;
+	font: 12px/1.5 Tahoma,Verdana,Helvetica,Arial,'Liberation Sans',FreeSans,sans-serif;
+	font-weight: bold;
+	color: #fff;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	margin: 0 10px 0 0;
+}
+a.btn{ display:inline-block; }
+	.btn_ok{ background:#84C44E; }
+	.btn_ok:hover{ background:#52812B; color:#fff; }
+	.btn_cancel{ background:#C91537; }
+	.btn_cancel:hover{ background:#B21331; color:#fff; }
+	.btn_misc{ background:#0076BD; }
+	.btn_misc:hover{ background:#00598E; color:#fff; }
+
+
+
+
+/** JBar **/
+.jbar{
+	width:100%;
+	position:fixed;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95); 
+	opacity: 0.95;
+	-moz-opacity: 0.95;
+	text-align:center;
+	left:0px;
+	z-index:9999999;
+	margin:0px;
+	padding:.35em;
+}
+.jbar-top{
+	top:0px;
+}
+.jbar-bottom{
+	bottom:0px;
+	color:#777;
+}
+.jbar-content{
+	line-height:46px;
+	font-size: 18px;
+	font-family:'Lucida Grande',sans-serif;
+}
+
+
+.notification{ background-color: #4e9a06; color: #fff !important; }
+.notification.err{ background-color: #c00; color: #fff !important; }
+.notification.warn{ background-color: #edd400; color: #000 !important; }
+
+
+
+
+/** jqModal **/
+/* jqModal base Styling courtesy of;
+	Brice Burgess <bhb@iceburg.net> */
+
+/* The Window's CSS z-index value is respected (takes priority). If none is supplied,
+	the Window's z-index value will be set to 3000 by default (via jqModal.js). */
+
+.jqmWindow {
+	display: none;
+
+	position: fixed;
+	top: 17%;
+	left: 50%;
+
+	margin-left: -300px;
+	width: 500px;
+
+	background-color: #EEE;
+	color: #333;
+	border: 5px solid #babdb6;
+	padding: 12px;
+}
+
+.jqmOverlay { background-color: #000; }
+
+/* Background iframe styling for IE6. Prevents ActiveX bleed-through (<select> form elements, etc.) */
+* iframe.jqm {position:absolute;top:0;left:0;z-index:-1;
+	width: expression(this.parentNode.offsetWidth+'px');
+	height: expression(this.parentNode.offsetHeight+'px');
+}
+
+/* Fixed posistioning emulation for IE6
+	 Star selector used to hide definition from browsers other than IE6
+	 For valid CSS, use a conditional include instead */
+* html .jqmWindow {
+	 position: absolute;
+	 top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+}
+
+
+
+
+/* BUTTONS */
+
+a.btn, button.btn{
+	display: block;
+	float: left;
+	margin: 0 7px 0 0;
+	background-color: #f5f5f5;
+	border: 1px solid #dedede;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+	font-size: 12px;
+	line-height: 130%;
+	text-decoration: none;
+	font-weight: bold;
+	color: #565656;
+	cursor: pointer;
+	padding: 5px 10px 6px 7px; /* Links */
+}
+button.btn{
+	width: auto;
+	overflow: visible;
+	padding: 4px 10px 3px 7px; /* IE6 */
+}
+
+button.btn[type]{
+	padding:5px 10px 5px 7px; /* Firefox */
+	line-height:17px; /* Safari */
+}
+*:first-child+html button.btn[type]{
+	padding:4px 10px 3px 7px; /* IE7 */
+}
+button.btn img, a.btn img{
+	margin: 0 3px -3px 0 !important;
+	padding: 0;
+	border: none;
+	width: 16px;
+	height: 16px;
+}
+
+/* STANDARD */
+
+button.btn:hover, a.btn:hover{
+	background-color:#dff4ff;
+	border:1px solid #c2e1ef;
+	color:#336699;
+}
+a.btn:active{
+	background-color:#6299c5;
+	border:1px solid #6299c5;
+	color:#fff;
+}
+
+/* POSITIVE */
+
+button.positive, a.positive{
+	color: #529214;
+}
+a.positive:hover, button.positive:hover{
+	background-color: #E6EFC2;
+	border: 1px solid #C6D880;
+	color: #529214;
+}
+a.positive:active{
+	background-color: #529214;
+	border: 1px solid #529214;
+	color: #fff;
+}
+
+/* NEGATIVE */
+
+a.negative, button.negative{
+	color: #d12f19;
+}
+a.negative:hover, button.negative:hover{
+	background: #fbe3e4;
+	border: 1px solid #fbc2c4;
+	color: #d12f19;
+}
+a.negative:active{
+	background-color: #d12f19;
+	border: 1px solid #d12f19;
+	color: #fff;
+}
+
+/* REGULAR */
+
+button.regular, a.regular{
+	color: #336699;
+}
+a.regular:hover, button.regular:hover{
+	background-color: #dff4ff;
+	border: 1px solid #c2e1ef;
+	color: #336699;
+}
+a.regular:active{
+	background-color: #6299c5;
+	border: 1px solid #6299c5;
+	color: #fff;
+}

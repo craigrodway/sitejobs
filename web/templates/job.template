@@ -1,0 +1,34 @@
+<%
+for(var j in jobs){
+	var job = jobs[j];
+%>
+
+<div class="job">
+
+	<div class="grid_2 alpha job-age">
+		<span class="number"><%= job.age.value %></span><span class="measure"><%= job.age.measure %></span>
+	</div>
+
+	<div class="grid_9 job-info">
+		<p class="top-line"><a href="#/view/<%= job.id %>">
+			<span class="type"><%= job.type %></span> in <span class="room"><%= job.room %></span>
+		</a></p>
+		<p>Submitted by 
+			<a href="#/creator/<%= job.creator %>"><span class="creator"><%= job.creator %></span></a>. &nbsp;
+			<span id="job-owner-<%= job.id %>">
+			<% if(job.owner){ %>
+				Assigned to <span class="owner"><%= (job.owner === user.username) ? 'you!' : job.owner %></span>
+			<% } else { %>
+				<a href="#/own/<%= job.id %>" data-method="post">Take ownership</a>.
+			<% } %>
+			</span>
+		</p>
+	</div>
+
+	<div class="grid_8 omega job-description"><%= job.description %></div>
+
+	<div class="clear"></div>
+
+</div>
+
+<% } %>
