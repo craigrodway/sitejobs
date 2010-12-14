@@ -141,3 +141,22 @@ function timespan($seconds = 1, $time = ''){
 	return $time;
 
 }
+
+
+
+
+/**
+ * Get a list of all job creators
+ */
+function lookup_creators(){
+	
+	global $db;
+	$creators = array();
+	$sql = 'SELECT DISTINCT(creator) FROM jobs';
+	$creators_rs = $db->query($sql)->FetchAllRows();
+	foreach($creators_rs as $creator){
+		$creators[] = $creator['creator'];
+	}
+	return $creators;
+	
+}

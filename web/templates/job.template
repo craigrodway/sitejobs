@@ -25,7 +25,7 @@ for(var j in jobs){
 		</p>
 	</div>
 
-	<div class="grid_8 omega job-description"><%= job.description %></div>
+	<div class="grid_7 omega job-description"><%= job.description %></div>
 
 	<div class="clear"></div>
 

@@ -240,6 +240,24 @@ div.comment p span{
 
 
 
+table.simple{
+	width: 100%;
+}
+
+table.simple tr td{
+	padding: 4px;
+}
+
+table.simple tr td label{
+	font-weight: bold;
+}
+
+table.simple tr td input, 
+table.simple tr td select{
+	padding: 2px;
+}
+
+
 /* Form buttons */
 input.btn, a.btn, button.btn{
 	padding: 4px 6px;
