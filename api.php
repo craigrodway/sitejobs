@@ -67,6 +67,8 @@ if($action == 'get'){
 			$jobs_rs = fRecordSet::build('Job', $search, array('created' => 'desc'));
 			$jobs = $jobs_rs->toArray();
 			foreach($jobs as &$job){
+				$comments_rs = fRecordSet::build('Comment', array('job_id=' => $job['id']), array('time' => 'asc'));
+				$job['comments'] = $comments_rs->toArray();
 				$job['age'] = timespan(strtotime($job['created']), time());
 				$row['created_'] = date("l j F Y, H:i", strtotime($job['created']));
 			}
@@ -78,7 +80,7 @@ if($action == 'get'){
 		} catch(fException $e) {
 			
 			$json['status'] = 'err';
-			$json['text'] = $e->getMessage();
+			$json['text'] = strip_tags($e->getMessage());
 			out($json);
 			
 		}
@@ -91,6 +93,10 @@ if($action == 'get'){
 			
 			$job = new Job($id);
 			$job = $job->toArray();
+			
+			// Retrieve comments and add other derived column data
+			$comments_rs = fRecordSet::build('Comment', array('job_id=' => $job['id']), array('time' => 'asc'));
+			$job['comments'] = $comments_rs->toArray();
 			$job['age'] = timespan(strtotime($job['created']), time());
 			$job['created_'] = date("l j F Y, H:i", strtotime($job['created']));
 			
@@ -101,7 +107,7 @@ if($action == 'get'){
 		} catch(fException $e) {
 		
 			$json['status'] = 'err';
-			$json['text'] = $e->getMessage();
+			$json['text'] = strip_tags($e->getMessage());
 			out($json);
 			
 		}
@@ -149,14 +155,14 @@ if($action == 'create'){
 	
 	} catch(fExpectedException $e){
 		
-		$json['text'] = $e->getMessage();
 		$json['status'] = 'err';
+		$json['text'] = strip_tags($e->getMessage());
 		out($json);
 		
 	} catch(fValidationException $e){
 		
-		$json['text'] = $e->getMessage();
 		$json['status'] = 'err';
+		$json['text'] = strip_tags($e->getMessage());
 		out($json);
 		
 	}
@@ -192,7 +198,7 @@ if($action == 'update'){
 			} catch(fExpectedException $e) {
 				
 				$json['status'] = 'err';
-				$json['text'] = 'Error: ' . $e->getMessage();
+				$json['text'] = strip_tags($e->getMessage());
 				out($json);
 				
 			}
@@ -218,6 +224,9 @@ if($action == 'update'){
 				$comment->setTime(new fTimestamp());
 				$comment->store();
 				
+				$job->setUpdated(new fTimestamp());
+				$job->store();
+				
 				$json['text'] = 'Comment added.';
 				
 				// Close job if required
@@ -233,13 +242,13 @@ if($action == 'update'){
 			} catch(fValidationException $e){
 				
 				$json['status'] = 'err';
-				$json['text'] = 'Error: ' . $e->getMessage();
+				$json['text'] = strip_tags($e->getMessage());
 				out($json);
 				
 			} catch(fException $e) {
 				
 				$json['status'] = 'err';
-				$json['text'] = 'Error: ' . $e->getMessage();
+				$json['text'] = strip_tags($e->getMessage());
 				out($json);
 				
 			}

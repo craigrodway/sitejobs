@@ -46,8 +46,29 @@
 		<td class="input"><%= job.description %></td>
 	</tr>
 	
+	<tr>
+		<td class="label">Comments</td>
+		<td class="input">
+		<%
+		if(job.comments){
+			for(var c in job.comments){
+				var comment = job.comments[c];
+				%>
+				<div class="comment">
+					<p><span class="comment-author"><%= comment.author %></span> &mdash;
+					<span class="comment-time"><%= comment.time %></span></p>
+					<p><%= comment.comment %></p>
+				</div>
+				<%
+			}
+		}
+		%>
+		</td>
+	</tr>
+	
 </table>
 
+<% if(job.status != 'closed'){ %>
 <table class="form noborder">
 	<tr>
 		<td style="width: 180px;">&nbsp;</td>
@@ -58,3 +79,4 @@
 		</td>
 	</tr>
 </table>
+<% } %>

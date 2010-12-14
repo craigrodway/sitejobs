@@ -56,7 +56,6 @@
 		 */
 		this.get('#/new', function(context){
 			this.t("New Jobs", "new_fg");
-			$('#main-list').text('');
 			$.getJSON(API, { action: "get", status: "new" }, function(res){
 				if(res.status == "ok"){
 					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
@@ -70,8 +69,6 @@
 		 */
 		this.get('#/open', function(context){
 			this.t("Jobs in progress", "open_fg");
-			$('#main-list').text('');
-			//$('#main-list').text(User._current_user.username);
 			$.getJSON(API, { action: "get", status: "open" }, function(res){
 				console.log(res);
 				if(res.status == "ok"){
@@ -86,7 +83,6 @@
 		 */
 		this.get('#/mine', function(context){
 			this.t("My Jobs", "mine_fg");
-			$('#main-list').text('');
 			$.getJSON(API, { action: "get", status: "open", owner: User._current_user.username }, function(res){
 				if(res.status == "ok"){
 					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
@@ -98,14 +94,17 @@
 		/**
 		 * Get all jobs that are closed
 		 */
-		this.get('#/closed', function(){
+		this.get('#/closed', function(context){
 			this.t("Completed jobs", "closed_fg");
-			$('#main-list').text('');
 			$.getJSON(API, { action: "get", status: "closed" }, function(res){
+				console.log(res);
 				if(res.status == "ok"){
-					$.each(res.jobs, function(i, row){
+					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
+					/*$.each(res.jobs, function(i, row){
 						context.render("web/templates/job.template", {job: row}).appendTo(context.$element());
-					});
+					});*/
+				} else {
+					$('#main-list').text('');
 				}
 			});
 		});
@@ -116,7 +115,6 @@
 		 */
 		this.get('#/view/:id', function(context){
 			var id = this.params['id'];
-			$('#main-list').text('');
 			this.t("Information about job ID " + id);
 			$.getJSON(API, { action: "get", id: id }, function(res){
 				context.partial("web/templates/jobdetail.template", {job: res.job, user: User._current_user });
@@ -126,11 +124,15 @@
 		
 		
 		/**
-		 * Add comment to a job
+		 * Add comment to a job (just show window)
 		 */
 		this.post('#/addcomment/:id', function(context){
 			var id = this.params['id'];
+			// Get the comment form template and then render it in a jqModal window
 			context.render('web/templates/addcomment.template', {id: id}, function(x){
+				// Need to duplicate the dialog element first, and then work on the copy
+				$('#dialog_source').clone().attr("id", "dialog").appendTo('body');
+				// Set the HTML contents then append dialog element to main Sammy element (so the form submits dynamicly)
 				$('#dialog').html(x).appendTo(context.$element()).jqm().jqmShow();
 			});
 		});
@@ -141,6 +143,7 @@
 		 */
 		this.post('#/addcomment', function(context){
 			console.log('This is #/addcomment');
+			var a = this;
 			var data = {
 				action: "update",
 				task: "addcomment",
@@ -150,8 +153,15 @@
 				email: (this.params['email']) ? 1 : 0,
 				close: (this.params['close']) ? 1 : 0,
 			};
-			$.post(API, data, function(data){
-				console.log(data);
+			$.post(API, data, function(ret){
+				if(ret.status == 'ok'){
+					// Hide the dialog
+					$('#dialog').jqmHide();
+					// Redirect to the job page (it will show the new comment)
+					a.redirect("#/view/" + data.id);
+					showNotification("Your comment has been added.");
+					context.trigger("update-counts");
+				}
 			});
 		}); 
 		
@@ -161,10 +171,10 @@
 		 */
 		this.post('#/own/:id', function(context){
 			var id = this.params['id'];
-			$.post(API, { action: "update", task: "setowner", id: id, owner: User._current_user.username }, function(data){
-				if(data.status == "ok"){
+			$.post(API, { action: "update", task: "setowner", id: id, owner: User._current_user.username }, function(ret){
+				if(ret.status == "ok"){
 					app.refresh();
-					showNotification(data.text);
+					showNotification(ret.text);
 					context.trigger("update-counts");
 				}
 			});
@@ -174,7 +184,7 @@
 		
 		
 		this.before(function(callback){
-			// Always make sure info bar is removed
+			// Always make sure notification info bar is removed (could end up with a pile-up of bars)
 			$.removebar();
 		});
 		

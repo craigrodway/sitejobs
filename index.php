@@ -58,7 +58,7 @@
 	<script type="text/javascript" src="javascript.php" charset="utf-8"></script>
 	<script type="text/javascript" src="http://intranet/v3/asp.sitejobs-auth.asp"></script>
 	
-	<div id="dialog" class="jqmWindow"></div>
+	<div id="dialog_source" class="jqmWindow"></div>
 	
 </body>
 </html>

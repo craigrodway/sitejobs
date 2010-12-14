@@ -225,6 +225,17 @@ label.check input {
 
 div.comment{
 	background: #FEF5A8;
+	padding: 5px 0;
+	margin: 10px 0;
+}
+
+div.comment p{
+	margin: 5px;
+}
+
+div.comment p span{
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 
