@@ -171,11 +171,12 @@
 		 */
 		this.post('#/own/:id', function(context){
 			var id = this.params['id'];
+			var a = this;
 			$.post(API, { action: "update", task: "setowner", id: id, owner: User._current_user.username }, function(ret){
 				if(ret.status == "ok"){
-					app.refresh();
-					showNotification(ret.text);
+					a.redirect("#/mine");
 					context.trigger("update-counts");
+					showNotification(ret.text);
 				}
 			});
 		});
@@ -185,7 +186,7 @@
 		
 		this.before(function(callback){
 			// Always make sure notification info bar is removed (could end up with a pile-up of bars)
-			$.removebar();
+			if( $('.jbar').length > 1 ) $.removebar();
 		});
 		
 		

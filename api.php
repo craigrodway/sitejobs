@@ -67,9 +67,13 @@ if($action == 'get'){
 			$jobs_rs = fRecordSet::build('Job', $search, array('created' => 'desc'));
 			$jobs = $jobs_rs->toArray();
 			foreach($jobs as &$job){
+				// Get comments for this job and add to job array
 				$comments_rs = fRecordSet::build('Comment', array('job_id=' => $job['id']), array('time' => 'asc'));
 				$job['comments'] = $comments_rs->toArray();
-				$job['age'] = timespan(strtotime($job['created']), time());
+				// Calculate proper end time (now for new & in progress; last-updated for closed)
+				$end_time = ($job['status'] == 'closed') ? strtotime($job['updated']) : time();
+				$job['age'] = timespan(strtotime($job['created']), $end_time);
+				// Format the date/time nicely
 				$row['created_'] = date("l j F Y, H:i", strtotime($job['created']));
 			}
 			

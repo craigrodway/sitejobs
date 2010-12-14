@@ -12,7 +12,7 @@
 (function($) {
 $.fn.jqm=function(o){
 var p={
-overlay: 50,
+overlay: 25,
 overlayClass: 'jqmOverlay',
 closeClass: 'jqmClose',
 trigger: '.jqModal',
