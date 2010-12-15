@@ -38,6 +38,7 @@ $creator	= fRequest::get('creator', 'string?');
 $job_id		= fRequest::get('job_id', 'integer?');		// Separate instance of Job ID for LIKE searches
 $room		= fRequest::get('room', 'string?');
 $type		= fRequest::get('type', 'string?');
+$first		= fRequest::getValid('first', array(NULL, "1", "0"));
 $searchtype = fRequest::getValid('searchtype', array('=', '~'));
 
 // If a job isn't been created, check for authentication
@@ -68,6 +69,7 @@ if($action == 'get'){
 		if($job_id){ $search['id'.$searchtype] = $job_id; }
 		if($room){ $search['room'.$searchtype] = $room; }
 		if($type){ $search['type='] = $type; }
+		if($first !== NULL){ $search['first='] = $first; }
 		
 		$json['search'] = $search;
 		

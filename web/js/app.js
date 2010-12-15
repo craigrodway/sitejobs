@@ -199,6 +199,7 @@
 				,room: this.params["room"]
 				,creator: this.params["creator"]
 				,type: this.params["type"]
+				,first: this.params["first"]
 				,searchtype: "~"
 			};
 			$.post(API, data, function(res){
@@ -327,8 +328,9 @@
 			e.preventDefault();
 			var data = {};
 			// Collect form values and put in data object
-			$('form#search input[type*=text],form#search select').each(function(i, el){
-				data[$(el).attr("name")] = $(el).val();
+			var fields = $("form#search :input").serializeArray();
+			$.each(fields, function(i, field){
+				data[field.name] = field.value;
 			});
 			// Run the Sammy route and pass it our form data
 			app.runRoute("post", "#/search", data);

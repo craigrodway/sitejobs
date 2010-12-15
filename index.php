@@ -90,6 +90,12 @@
 							</select></td>
 						</tr>
 						<tr>
+							<td><label for="first_any">First</label></td>
+							<td>
+								<label for="first_yes" style="font-weight: normal"><input type="radio" name="first" id="first_yes" value="1" />Yes</label><br />
+								<label for="first_no" style="font-weight: normal"><input type="radio" name="first" id="first_no" value="0" />No</label>
+							</td>
+						<tr>
 							<td>&nbsp;</td>
 							<td>
 								<button type="submit" class="btn positive" name="submit"> 
