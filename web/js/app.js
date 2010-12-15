@@ -58,7 +58,11 @@
 			this.t("New Jobs", "new_fg");
 			$.getJSON(API, { action: "get", status: "new" }, function(res){
 				if(res.status == "ok"){
-					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
+					context.partial("web/templates/job.template", {
+						jobs: res.jobs
+						, user: User._current_user
+						, emptyset: "No new problems!" 
+					});
 				}
 			});
 		});
@@ -72,7 +76,11 @@
 			$.getJSON(API, { action: "get", status: "open" }, function(res){
 				console.log(res);
 				if(res.status == "ok"){
-					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
+					context.partial("web/templates/job.template", {
+						jobs: res.jobs
+						, user: User._current_user
+						, emptyset: "No current jobs in progress."
+					});
 				}
 			});
 		});
@@ -85,7 +93,11 @@
 			this.t("My Jobs", "mine_fg");
 			$.getJSON(API, { action: "get", status: "open", owner: User._current_user.username }, function(res){
 				if(res.status == "ok"){
-					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
+					context.partial("web/templates/job.template", {
+						jobs: res.jobs
+						, user: User._current_user
+						, emptyset: "You aren't assigned to any existing jobs."
+					});
 				}
 			});
 		});
@@ -100,9 +112,6 @@
 				console.log(res);
 				if(res.status == "ok"){
 					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
-					/*$.each(res.jobs, function(i, row){
-						context.render("web/templates/job.template", {job: row}).appendTo(context.$element());
-					});*/
 				} else {
 					$('#main-list').text('');
 				}

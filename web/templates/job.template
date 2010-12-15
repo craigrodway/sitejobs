@@ -34,3 +34,5 @@ for(var j in jobs){
 </div>
 
 <% } %>
+
+<%= (jobs.length == 0 && emptyset.length > 1) ? '<br /><p>' + emptyset + '</p>' : '' %>
