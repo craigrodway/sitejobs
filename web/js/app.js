@@ -145,13 +145,13 @@
 			console.log('This is #/addcomment');
 			var a = this;
 			var data = {
-				action: "update",
-				task: "addcomment",
-				id: this.params['id'],
-				comment: this.params['comment'],
-				author: User._current_user.username,
-				email: (this.params['email']) ? 1 : 0,
-				close: (this.params['close']) ? 1 : 0,
+				action: "update"
+				,task: "addcomment"
+				,id: this.params['id']
+				,comment: this.params['comment']
+				,author: User._current_user.username
+				,email: (this.params['email']) ? 1 : 0
+				,close: (this.params['close']) ? 1 : 0
 			};
 			$.post(API, data, function(ret){
 				if(ret.status == 'ok'){
@@ -164,6 +164,31 @@
 				}
 			});
 		}); 
+		
+		
+		/**
+		 * Handle search form submission
+		 */
+		this.post("#/search", function(context){
+			var data = {
+				 action: "get"
+				,job_id: this.params["id"]
+				,room: this.params["room"]
+				,creator: this.params["creator"]
+				,type: this.params["type"]
+				,searchtype: "~"
+			};
+			$.post(API, data, function(res){
+				if(res.status == 'ok'){
+					context.t("Search results", "");
+					if(res.jobs.length > 0){
+						context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
+					} else {
+						$('#main-list').html('<br /><p>No results. Please try again with different options.</p>');
+					}
+				}
+			});
+		});
 		
 		
 		/**
@@ -272,6 +297,20 @@
 			app.$element().append(form);
 			form.submit();			
 		});
+		
+		
+		// Handle search queries from out-of-app search box, and send to main app
+		$('form#search').bind("submit", function(e){
+			e.preventDefault();
+			var data = {};
+			// Collect form values and put in data object
+			$('form#search input[type*=text],form#search select').each(function(i, el){
+				data[$(el).attr("name")] = $(el).val();
+			});
+			// Run the Sammy route and pass it our form data
+			app.runRoute("post", "#/search", data);
+		});
+		
 		
 		/*$('button[name*=addcomment]').live("click", function(e){
 			e.preventDefault();

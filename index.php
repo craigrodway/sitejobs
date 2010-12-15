@@ -57,42 +57,48 @@
 			
 			<div class="box"><div>
 				<h2>Search</h2>
-				<table class="simple">
-					<tr>
-						<td><label for="room">ID</label></td>
-						<td><input type="text" name="id" id="search_id" size="6" /></td>
-					</tr>
-					<tr>
-						<td><label for="room">Room</label></td>
-						<td><input type="text" name="room" id="search_room" size="10" /></td>
-					</tr>
-					<tr>
-						<td><label for="room">Creator</label></td>
-						<td><select name="creator" id="search_creator">
-							<option value="">(any)</option>
-							<?php
-							$creators = lookup_creators();
-							foreach($creators as $creator){
-								printf('<option value="%1$s">%1$s</option>', $creator);
-							}
-							?>
-						</select></td>
-					</tr>
-					<tr>
-						<td><label for="room">Type</label></td>
-						<td><select type="text" name="type" id="search_type">
-							<option value="">(any)</option>
-							<option value="damage">Damage</option>
-							<option value="replacement">Replacement</option>
-							<option value="wear-and-tear">Wear &amp; Tear</option>
-							<option value="fault">Fault</option>
-						</select></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><input type="submit" name="search" value="Find" /></td>
-					</tr>
-				</table>
+				<form id="search" method="post" action="#/search">
+					<table class="simple">
+						<tr>
+							<td><label for="room">ID</label></td>
+							<td><input type="text" name="id" id="search_id" size="6" /></td>
+						</tr>
+						<tr>
+							<td><label for="room">Room</label></td>
+							<td><input type="text" name="room" id="search_room" size="10" /></td>
+						</tr>
+						<tr>
+							<td><label for="room">Creator</label></td>
+							<td><select name="creator" id="search_creator">
+								<option value="">(any)</option>
+								<?php
+								$creators = lookup_creators();
+								foreach($creators as $creator){
+									printf('<option value="%1$s">%1$s</option>', $creator);
+								}
+								?>
+							</select></td>
+						</tr>
+						<tr>
+							<td><label for="room">Type</label></td>
+							<td><select type="text" name="type" id="search_type">
+								<option value="">(any)</option>
+								<option value="damage">Damage</option>
+								<option value="replacement">Replacement</option>
+								<option value="wear-and-tear">Wear &amp; Tear</option>
+								<option value="fault">Fault</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>
+								<button type="submit" class="btn positive" name="submit"> 
+									<img src="web/img/search.png" alt=""/> Find
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 			</div></div>
 		</div>
 		

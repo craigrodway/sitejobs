@@ -35,6 +35,10 @@ $status		= fRequest::getValid('status', array(FALSE, 'new', 'open', 'closed'));
 $id			= fRequest::get('id', 'integer?');
 $owner		= fRequest::get('owner', 'string?');
 $creator	= fRequest::get('creator', 'string?');
+$job_id		= fRequest::get('job_id', 'integer?');		// Separate instance of Job ID for LIKE searches
+$room		= fRequest::get('room', 'string?');
+$type		= fRequest::get('type', 'string?');
+$searchtype = fRequest::getValid('searchtype', array('=', '~'));
 
 // If a job isn't been created, check for authentication
 if($action != 'create'){ auth(); }
@@ -51,16 +55,21 @@ if($action == 'get'){
 	
 		// No ID - get all
 		
-		if(!$status){
+		/*if(!$status){
 			$json['status'] = 'err';
 			$json['text'] = "No filter supplied. ($action)";
 			out($json);
-		}
+		}*/
 		
 		// Add search parameters if present
-		if($status){ $search['status='] = $status; }
-		if($owner){ $search['owner='] = $owner; }
+		if($status){ $search['status'.$searchtype] = $status; }
+		if($owner){ $search['owner'.$searchtype] = $owner; }
 		if($creator){ $search['creator='] = $creator; }
+		if($job_id){ $search['id'.$searchtype] = $job_id; }
+		if($room){ $search['room'.$searchtype] = $room; }
+		if($type){ $search['type='] = $type; }
+		
+		$json['search'] = $search;
 		
 		try {
 			
