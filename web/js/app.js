@@ -200,6 +200,7 @@
 				,creator: this.params["creator"]
 				,type: this.params["type"]
 				,first: this.params["first"]
+				,status: this.params["status"]
 				,searchtype: "~"
 			};
 			$.post(API, data, function(res){

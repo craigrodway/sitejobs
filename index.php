@@ -90,6 +90,15 @@
 							</select></td>
 						</tr>
 						<tr>
+							<td><label for="status">Status</label></td>
+							<td><select type="text" name="status" id="search_status">
+								<option value="">(any)</option>
+								<option value="new">New</option>
+								<option value="open">In Progress</option>
+								<option value="closed">Completed</option>
+							</select></td>
+						</tr>
+						<tr>
 							<td><label for="first_any">First</label></td>
 							<td>
 								<label for="first_yes" style="font-weight: normal"><input type="radio" name="first" id="first_yes" value="1" />Yes</label><br />
