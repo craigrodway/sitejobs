@@ -124,6 +124,29 @@
 		
 		
 		/**
+		 * Get all jobs created by...
+		 */
+		this.get("#/creator/:user", function(context){			
+			var data = {
+				 action: "get"
+				,creator: this.params["user"]
+				,searchtype: "="
+			};
+			context.t("Problems reported by " + data.creator, "");
+			$.post(API, data, function(res){
+				console.log(res);
+				if(res.status == "ok"){
+					if(res.jobs.length > 0){
+						context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
+					} else {
+						$('#main-list').html("<br /><p>No problems reported by " + data.creator + "</p>");
+					}
+				}
+			});
+		});
+		
+		
+		/**
 		 * Add comment to a job (just show window)
 		 */
 		this.post('#/addcomment/:id', function(context){
