@@ -74,7 +74,7 @@
 		this.get('#/open', function(context){
 			this.t("Jobs in progress", "open_fg");
 			$.getJSON(API, { action: "get", status: "open" }, function(res){
-				console.log(res);
+				//console.log(res);
 				if(res.status == "ok"){
 					context.partial("web/templates/job.template", {
 						jobs: res.jobs
@@ -109,7 +109,7 @@
 		this.get('#/closed', function(context){
 			this.t("Completed jobs", "closed_fg");
 			$.getJSON(API, { action: "get", status: "closed" }, function(res){
-				console.log(res);
+				//console.log(res);
 				if(res.status == "ok"){
 					context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
 				} else {
@@ -143,7 +143,7 @@
 			};
 			context.t("Problems reported by " + data.creator, "");
 			$.post(API, data, function(res){
-				console.log(res);
+				//console.log(res);
 				if(res.status == "ok"){
 					if(res.jobs.length > 0){
 						context.partial("web/templates/job.template", {jobs: res.jobs, user: User._current_user });
@@ -174,7 +174,7 @@
 		 * Handle form submission for adding a comment
 		 */
 		this.post('#/addcomment', function(context){
-			console.log('This is #/addcomment');
+			//console.log('This is #/addcomment');
 			var a = this;
 			var data = {
 				action: "update"

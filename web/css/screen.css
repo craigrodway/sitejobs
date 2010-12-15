@@ -90,6 +90,7 @@ a.button:hover{
 
 div.box{
 	border: 1px solid #ccc;
+	background: #efefef;
 }
 div.box>div{
 	margin: 0.7em;
