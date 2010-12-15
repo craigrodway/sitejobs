@@ -113,7 +113,9 @@ if($action == 'get'){
 			// Retrieve comments and add other derived column data
 			$comments_rs = fRecordSet::build('Comment', array('job_id=' => $job['id']), array('time' => 'asc'));
 			$job['comments'] = $comments_rs->toArray();
-			$job['age'] = timespan(strtotime($job['created']), time());
+			// Calculate proper end time (now for new & in progress; last-updated for closed)
+			$end_time = ($job['status'] == 'closed') ? strtotime($job['updated']) : time();
+			$job['age'] = timespan(strtotime($job['created']), $end_time);
 			$job['created_'] = date("l j F Y, H:i", strtotime($job['created']));
 			$job['description_short'] = word_limiter($job['description'], 20);
 			
@@ -254,7 +256,6 @@ if($action == 'update'){
 				}
 				
 				$json['status'] = 'ok';
-				out($json);
 				
 			} catch(fValidationException $e){
 				
@@ -269,6 +270,60 @@ if($action == 'update'){
 				out($json);
 				
 			}
+			
+			if($email === FALSE){
+				out($json);
+			}
+			
+			// Continue - send email to creator
+			
+			try {
+				
+				$email = new fEmail();
+				$from = $author;
+				
+				if($close == TRUE){
+					
+					$subject = sprintf('Site Team Problem Closed [%d]', $job->getId());
+					$email->loadBody('inc/email-complete.txt', array(
+						'{person}' => $author,
+						'{comment}' => $comment_text,
+						'{type}' => $job->getType(),
+						'{room}' => $job->getRoom()
+					));
+				
+				} else {
+				
+					$subject = sprintf('Site Team Problem Update [%d]', $job->getId());
+					$email->loadBody('inc/email-comment.txt', array(
+						'{person}' => $author,
+						'{comment}' => $comment_text,
+						'{type}' => $job->getType(),
+						'{room}' => $job->getRoom()
+					));
+							
+				}
+				
+				$email->addRecipient($job->getCreator() . '@bishopbarrington.net');
+				$email->setFromEmail($from . '@bishopbarrington.net');
+				$email->setSubject($subject);
+				
+				$message_id = $email->send();
+				
+			} catch(fValidationException $e) {
+				
+				$json['status'] = 'err';
+				$json['text'] = 'The comment was logged, but failed to send the email: ' .  $e->getMessage();
+				
+			} catch(fException $e){
+				
+				$json['status'] = 'err';
+				$json['text'] = $e->getMessage();
+				
+			}
+			
+			// Finally send return
+			out($json);
 			
 		}		// End of task == 'addcomment'
 		

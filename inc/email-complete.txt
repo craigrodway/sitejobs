@@ -1,0 +1,11 @@
+Hello.
+
+Your problem has now been completed by {person}, and the following comment has been added:
+
+{comment}
+
+Thanks.
+
+----------
+Problem type: {type}
+Room: {room}
