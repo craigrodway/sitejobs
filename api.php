@@ -86,6 +86,7 @@ if($action == 'get'){
 				$job['age'] = timespan(strtotime($job['created']), $end_time);
 				// Format the date/time nicely
 				$row['created_'] = date("l j F Y, H:i", strtotime($job['created']));
+				$job['description_short'] = word_limiter($job['description'], 20);
 			}
 			
 			$json['status'] = 'ok';
@@ -114,6 +115,7 @@ if($action == 'get'){
 			$job['comments'] = $comments_rs->toArray();
 			$job['age'] = timespan(strtotime($job['created']), time());
 			$job['created_'] = date("l j F Y, H:i", strtotime($job['created']));
+			$job['description_short'] = word_limiter($job['description'], 20);
 			
 			$json['status'] = 'ok';
 			$json['job'] = $job;
