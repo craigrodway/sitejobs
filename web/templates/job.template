@@ -25,7 +25,9 @@ for(var j in jobs){
 		</p>
 	</div>
 
-	<div class="grid_7 omega job-description"><%= job.description %></div>
+	<div class="grid_7 omega job-description <%= (job.first == 0) ? 'first-report' : '' %>">
+		<p><%= job.description %></p>
+	</div>
 
 	<div class="clear"></div>
 

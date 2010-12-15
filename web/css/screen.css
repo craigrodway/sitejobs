@@ -138,6 +138,13 @@ div.info p.bottom-line{
 	font-weight: bold;
 }
 
+div.first-report{
+	background: url(../img/flag_red.png) top right no-repeat;
+}
+div.first-report p{
+	margin-right: 20px;
+}
+
 
 
 

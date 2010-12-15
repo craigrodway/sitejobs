@@ -335,12 +335,6 @@
 		});
 		
 		
-		/*$('button[name*=addcomment]').live("click", function(e){
-			e.preventDefault();
-			console.log(app.EventContext.render('web/templates/addcomment.template'));
-			$('#dialog').jqm({ overlay: 0, ajax: 'web/templates/addcomment.template' }).jqmShow();
-		});*/
-		
 		// Run app
 		app.run("#/new");
 		
