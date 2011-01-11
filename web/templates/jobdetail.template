@@ -73,7 +73,7 @@
 	<tr>
 		<td style="width: 180px;">&nbsp;</td>
 		<td>
-			<a class="btn positive" name="addcomment" href="#/addcomment/<%= job.id %>" data-method="post"> 
+			<a class="btn positive" name="addcomment" href="#/addcomment/<%= job.id %>" > 
 				<img src="web/img/comment_add.png" alt=""/> Add Comment
 			</a>
 		</td>

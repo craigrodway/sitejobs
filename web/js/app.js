@@ -158,7 +158,7 @@
 		/**
 		 * Add comment to a job (just show window)
 		 */
-		this.post('#/addcomment/:id', function(context){
+		this.get('#/addcomment/:id', function(context){
 			var id = this.params['id'];
 			// Get the comment form template and then render it in a jqModal window
 			context.render('web/templates/addcomment.template', {id: id}, function(x){
@@ -228,7 +228,7 @@
 		/**
 		 * Take ownership of a job
 		 */
-		this.post('#/own/:id', function(context){
+		this.get('#/own/:id', function(context){
 			var id = this.params['id'];
 			var a = this;
 			$.post(API, { action: "update", task: "setowner", id: id, owner: User._current_user.username }, function(ret){
@@ -320,6 +320,7 @@
 		});
 		
 		// Links that use forms for various methods (i.e. post, delete).
+		/* CR 2011-01-11. Doesn't work on IE7. Removing.
 		$("a[data-method]").live("click", function(e) {
 			e.preventDefault();
 			var link = $(this);
@@ -327,11 +328,13 @@
 				return fasle;
 			}
 			var method = link.attr("data-method") || "get";
-			var form = $("<form>", { style: "display: none", method: method, action: link.attr("href") });
+			var currentTime = new Date();
+			var _id = currentTime.valueOf();
+			var form = $("<form>", { id: _id, method: method, action: link.attr("href") });
 			app.$element().append(form);
-			form.submit();			
+			form.submit();
 		});
-		
+		*/
 		
 		// Handle search queries from out-of-app search box, and send to main app
 		$('form#search').bind("submit", function(e){

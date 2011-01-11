@@ -19,7 +19,7 @@ for(var j in jobs){
 			<% if(job.owner){ %>
 				Assigned to <span class="owner"><%= (job.owner === user.username) ? 'you!' : job.owner %></span>
 			<% } else { %>
-				<a href="#/own/<%= job.id %>" data-method="post">Take ownership</a>.
+				<a href="#/own/<%= job.id %>">Take ownership</a>.
 			<% } %>
 			</span>
 		</p>
